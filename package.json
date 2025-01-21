@@ -1,0 +1,30 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/leaflet": "^1.2.6",
+    "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
+    "leaflet": "^1.9.4",
+    "nuxt": "^3.15.2",
+    "openmeteo": "^1.1.4",
+    "pug": "^3.0.3",
+    "pug-plain-loader": "^1.1.0",
+    "vue": "latest",
+    "vue-leaflet": "^0.1.0",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17"
+  }
+}
