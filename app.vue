@@ -75,10 +75,6 @@ div(class="bg-gray-100 text-gray-900 font-sans min-h-screen flex flex-col")
 <script lang="ts">
 import { format } from 'date-fns';
 
-const { fetchWeatherData } = useWeather();
-
-const { fetchLocationData } = useLocation();
-
 import {
   ref,
   reactive,
@@ -125,15 +121,15 @@ export default defineComponent({
 
       coordinates.lng = event.latlng.lng;
 
-      getLocationInfo();
+      getLocation();
 
-      fetchWeather();
+      getWeather();
     };
 
-    const getLocationInfo = async () => {
+    const getLocation = async () => {
       locationLoading.value = true;
 
-      const data = await fetchLocationData(coordinates.lat, coordinates.lng);
+      const data = await useLocation(coordinates.lat, coordinates.lng);
 
       coordinates.country = data.address.country;
 
@@ -155,10 +151,8 @@ export default defineComponent({
       locationLoading.value = false;
     };
 
-    const fetchWeather = async (): Promise<void> => {
-      dailyWeather.value = [];
-
-      const data = await fetchWeatherData(coordinates.lat, coordinates.lng);
+    const getWeather = async (): Promise<void> => {
+      const data = await useWeather(coordinates.lat, coordinates.lng);
 
       currentWeather.temperature = Math.floor(data.current.temperature_2m);
 
@@ -182,13 +176,13 @@ export default defineComponent({
     const loadMap = async (): Promise<void> => {
       mapLoading.value = true;
 
-      await fetchWeather();
+      await getWeather();
 
       mapLoading.value = false;
     };
 
     onMounted(() => {
-      getLocationInfo();
+      getLocation();
       loadMap();
     });
 
